@@ -6,5 +6,6 @@ export const encrypt = async (data) =>{
 }
 
 export const compare = async (data, hashData) =>{
+
     return await bcrypt.compare(data, hashData)
 }

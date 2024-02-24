@@ -7,6 +7,7 @@ export const createProducto = async (producto) =>{
         const connection = await database.connect()
 
         const {rows} = await connection.query(query, values)
+        await connection.release();
         console.log(rows)
         return rows
     }catch(e){
@@ -20,6 +21,7 @@ export const getAllProductos = async () =>{
    try{
        const connection = await database.connect()
        const {rows} = await connection.query(query)
+       await connection.release();
        console.log(rows)
        return rows
    }catch(e){
@@ -35,6 +37,7 @@ export const updateProduct = async (producto) =>{
         const connection = await database.connect()
 
         const {rows} = await connection.query(query, values)
+        await connection.release();
         console.log(rows)
         return rows
     }catch(e){
@@ -42,3 +45,17 @@ export const updateProduct = async (producto) =>{
         return null
     }
 }
+export const deleteProduct = async (data) =>{
+    const query = 'delete from productos where referencia=$1'
+    const values = [data.referencia];
+    try{
+        const connection = await database.connect()
+        const {rows} = await connection.query(query,values)
+        await connection.release();
+        console.log(rows)
+        return rows
+    }catch(e){
+        console.log(e)
+        return null
+    }
+ }

@@ -7,6 +7,7 @@ export const createUser = async (user) =>{
     try{
         const connection = await database.connect()
         const {rows} = await connection.query(query, values)
+        await connection.release();
         return rows
     }catch(e){
         console.log(e)
@@ -21,6 +22,7 @@ export const loginUser = async (user) =>{
         const connection = await database.connect()
 
         const {rows} = await connection.query(query, values)
+        await connection.release();
         return rows[0]
     }catch(e){
         // console.log(e)
@@ -33,6 +35,7 @@ export const checkSecurityAnswer = async (user) =>{
     try{
         const connection = await database.connect()
         const {rows} = await connection.query(query, values)
+        await connection.release();
         return rows[0]
     }catch(e){
         return null

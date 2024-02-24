@@ -1,4 +1,4 @@
-import { createProducto, getAllProductos, updateProduct } from "../models/producto.js"
+import { createProducto, getAllProductos, updateProduct, deleteProduct } from "../models/producto.js"
 
 export const registerProducto = async (req, res) => {
     const { precio, referencia, marca,nombre,tipo } = req.body
@@ -25,6 +25,18 @@ export const updateProducto = async (req, res) => {
         precio, referencia, marca,nombre,tipo
     })
 
-    if (!updatedProduct) return res.status(400).json({ "message": "error al actualoizar el producto" })
+    if (!updatedProduct) return res.status(400).json({ "message": "error al actualizar el producto" })
+    return res.status(200).json({"message": "OK"})
+}
+
+export const deleteProductos = async (req, res) => {
+    console.log(req.body)
+    const {referencia} = req.body
+
+    const deleteProducto = await deleteProduct({
+         referencia
+    })
+
+    if (!deleteProducto) return res.status(400).json({ "message": "error al borrar producto" })
     return res.status(200).json({"message": "OK"})
 }

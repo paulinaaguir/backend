@@ -1,9 +1,9 @@
-import { createUser, loginUser, checkSecurityAnswer } from "../models/user.js";
+import { createUser, loginUser } from "../models/user.js";
 import { encrypt, compare } from "../helpers/handleBcrypt.js";
 import { encryptCrypto, decryptCrypto } from "../helpers/handleCrypto.js";
 
 export const registerUser = async (req, res) => {
-  let { id, name, password, role, email, phone, question, answer } = req.body;
+  let { id, name, password, role, email, phone} = req.body;
   //son promesas y por eso el await
   name = await encryptCrypto(name);
   email = await encryptCrypto(email);
@@ -17,8 +17,7 @@ export const registerUser = async (req, res) => {
     role,
     email,
     phone,
-    question,
-    answer,
+
   });
   if (!registeredUser)
     return res.status(400).json({ message: "error al registrar usuario" });
@@ -42,23 +41,5 @@ export const logUser = async (req, res) => {
     },
   });
 };
-export const checkSecurityAnswercll = async (req, res) => {
-  const { id, answer } = req.body;
-  const getAnswer = await checkSecurityAnswer({
-    id,
-  });
-  if (!getAnswer)return res.status(400).json({ message: "error al recibir respuesta de bdd" });
-  if(getAnswer.answer!=answer) return res.status(400).json({ message: "respuesta incorrecta" });
-  return res.status(200).json({
-    response: "ok"
-  });
-};
 
 
-
-export const getQuestioncll = async (req, res) => {
-  const { id, question } = req.body;
-  const checkShit = await checkSecurityAnswer({
-    id,
-  });
-};

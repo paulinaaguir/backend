@@ -6,4 +6,4 @@ export const database = new pg.Pool({
   database: "postgres",
   password: "12345",
   port: 3434,
-});
+}); 

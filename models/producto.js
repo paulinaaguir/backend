@@ -1,8 +1,8 @@
 import {database} from "../database/database.js"
 // updateProduct
 export const createProducto = async (producto) =>{
-    const values = [producto.referencia, producto.nombre, producto.precio, producto.marca, producto.tipo]
-    const query = 'INSERT INTO productos (referencia, nombre, precio, marca,tipo) values ($1, $2, $3, $4,$5)'
+    const values = [producto.referencia, producto.nombre, producto.precio, producto.marca, producto.tipo,producto.url]
+    const query = 'INSERT INTO productos (referencia, nombre, precio, marca,tipo,url) values ($1, $2, $3, $4,$5,$6)'
     try{
         const connection = await database.connect()
 

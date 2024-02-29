@@ -8,6 +8,7 @@ export const createUser = async (user) =>{
         const connection = await database.connect()
         const {rows} = await connection.query(query, values)
         await connection.release();
+        console.log(rows)
         return rows
     }catch(e){
         console.log(e)

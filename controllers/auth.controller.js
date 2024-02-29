@@ -19,8 +19,7 @@ export const registerUser = async (req, res) => {
     phone,
 
   });
-  if (!registeredUser)
-    return res.status(400).json({ message: "error al registrar usuario" });
+  if (!registeredUser) return res.status(400).json({ message: "error al registrar usuario" });
   return res.status(200).json({ message: "OK" });
 };
 

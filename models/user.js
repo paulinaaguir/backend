@@ -30,3 +30,18 @@ export const loginUser = async (user) =>{
         return null
     }
 }
+
+export const recoverPassword = async (user) =>{
+    const values = [user.id,user.encriptedPassword]
+    const query = 'update usuarios set password =$2 where id = $1'
+    try{
+        const connection = await database.connect()
+
+        const {rows} = await connection.query(query, values)
+        await connection.release();
+        return rows
+    }catch(e){
+        // console.log(e)
+        return null
+    }
+}

@@ -1,4 +1,4 @@
-import { createUser, loginUser } from "../models/user.js";
+import { createUser, loginUser, recoverPassword } from "../models/user.js";
 import { encrypt, compare } from "../helpers/handleBcrypt.js";
 import { encryptCrypto, decryptCrypto } from "../helpers/handleCrypto.js";
 
@@ -17,7 +17,6 @@ export const registerUser = async (req, res) => {
     role,
     email,
     phone,
-
   });
   if (!registeredUser) return res.status(400).json({ message: "error al registrar usuario" });
   return res.status(200).json({ message: "OK" });
@@ -39,6 +38,15 @@ export const logUser = async (req, res) => {
       role: loggedUser.role,
     },
   });
+};
+
+export const recoverPass = async (req, res) => {
+  let { id, password, passwordRepeat} = req.body;
+  if(password != passwordRepeat) return res.status(400).json({ message: "error al cambiar clave" }); 
+  const encriptedPassword = await encrypt(password);
+  const response  = await recoverPassword({id,encriptedPassword})
+  if (!response) return res.status(400).json({ message: "error al cambiar clave" });
+  return res.status(200).json({ message: "OK" });
 };
 
 

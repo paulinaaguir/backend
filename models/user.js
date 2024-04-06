@@ -44,4 +44,4 @@ export const recoverPassword = async (user) =>{
         // console.log(e)
         return null
     }
-}
+}   

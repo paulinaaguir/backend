@@ -1,10 +1,10 @@
 import { createProducto, getAllProductos, updateProduct, deleteProduct } from "../models/producto.js"
 
 export const registerProducto = async (req, res) => {
-    const { precio, referencia, marca,nombre,tipo} = req.body
+    const { precio, referencia, marca,nombre,tipo,stock} = req.body
 
     const createdProduct = await createProducto({
-        precio, referencia, marca,nombre,tipo
+        precio, referencia, marca,nombre,tipo,stock
     })
 
     if (!createdProduct) return res.status(400).json({ "message": "error al registrar producto" })
@@ -19,10 +19,10 @@ export const getProductos = async (req, res) => {
 }
 
 export const updateProducto = async (req, res) => {
-    const { precio, referencia, marca,nombre,tipo} = req.body
+    const { precio, referencia, marca,nombre,tipo,stock} = req.body
 
     const updatedProduct = await updateProduct({
-        precio, referencia, marca,nombre,tipo
+        precio, referencia, marca,nombre,tipo,stock
     })
 
     if (!updatedProduct) return res.status(400).json({ "message": "error al actualizar el producto" })

@@ -33,4 +33,5 @@ export const GenerarPdf = (req, dataCallBack, endCallBack) => {
 
   // Finalizar y cerrar el documento
   doc.end();
+  
 };

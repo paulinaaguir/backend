@@ -59,3 +59,19 @@ export const deleteProduct = async (data) =>{
         return null
     }
  }
+
+
+ export const updateStock = async (producto) =>{
+    const query ='update productos set stock=$2 where referencia = $1'
+    const values = [producto.referencia,producto.stock];
+    try{
+        const connection = await database.connect()
+        const {rows} = await connection.query(query,values)
+        await connection.release();
+        return rows
+    }catch(e){
+        console.log(e)
+        return null
+    }
+ }
+    

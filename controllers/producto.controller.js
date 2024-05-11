@@ -1,4 +1,4 @@
-import { createProducto, getAllProductos, updateProduct, deleteProduct } from "../models/producto.js"
+import { createProducto, getAllProductos, updateProduct, deleteProduct, updateStock } from "../models/producto.js"
 
 export const registerProducto = async (req, res) => {
     const { precio, referencia, marca, nombre, tipo, stock, fecha, url } = req.body
@@ -38,5 +38,17 @@ export const deleteProductos = async (req, res) => {
     })
 
     if (!deleteProducto) return res.status(400).json({ "message": "error al borrar producto" })
+    return res.status(200).json({ "message": "OK" })
+}
+
+export const setUpdateStock = async (req, res) => {
+    console.log(req.body)
+    const { referencia, stock} = req.body
+
+    const updateStockVar = await updateStock({
+        referencia,stock
+    })
+
+    if (!updateStockVar) return res.status(400).json({ "message": "error al actualizar stock" })
     return res.status(200).json({ "message": "OK" })
 }

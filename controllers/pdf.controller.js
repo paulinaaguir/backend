@@ -22,7 +22,7 @@ export const GenerarPdf = (req, dataCallBack, endCallBack) => {
     // Agregar detalles de la compra
     datos.forEach(element => {
       doc.fontSize(14).text(`${element.cantidad}`, startX -15, startY);
-      doc.fontSize(14).text(`Producto: ${element.nombre}`, startX + 40 , startY );
+      doc.fontSize(14).text(`${element.nombre}`, startX + 40 , startY );
       doc.fontSize(14).text("------------------: ", startX + 260 , startY );
       doc.fontSize(14).text( "$"+element.precio, startX + 360, startY);
      
